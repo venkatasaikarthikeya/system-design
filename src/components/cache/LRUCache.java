@@ -65,7 +65,7 @@ class DoublyLinkedList {
 
 public class LRUCache {
 
-    private Integer capacity;
+    private final Integer capacity;
     private final DoublyLinkedList dll;
     private final HashMap<Integer, DLLNode> lruCache;
 
