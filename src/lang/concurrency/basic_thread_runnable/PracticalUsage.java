@@ -35,12 +35,15 @@ public class PracticalUsage {
                     exits the application, the application will still run because the other threads it created
                     are still running in the background.
 
-                    To address this problem, we have the concept of Daemon threads.
+                    To address this problem, we have the concept of Daemon threads. It is very simple to create
+                    a Daemon thread. All you need to do is to setDaemon(true) for that thread. If you want to make it
+                    normal you can again make setDaemon(false) for the same thread.
                 */
                 Thread t = new Thread(() -> {
                     int result = PrimeNumberUtil.findNthPrime(n);
                     System.out.println(n + "th prime number is " + result);
                 });
+                t.setDaemon(true);
                 t.start();
             }
         }
