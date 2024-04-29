@@ -1,11 +1,19 @@
 package lang.concurrency.basic_thread_runnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PracticalUsage {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        List<Thread> threads = new ArrayList<>();
+
+        Thread reporterThread = getReporterThread(threads);
+        reporterThread.start();
+
         while (true) {
             System.out.println("Enter the value of n to find nth prime number: ");
             int n = sc.nextInt();
@@ -43,9 +51,35 @@ public class PracticalUsage {
                     int result = PrimeNumberUtil.findNthPrime(n);
                     System.out.println(n + "th prime number is " + result);
                 });
-                t.setDaemon(true);
+                threads.add(t);
+                // t.setDaemon(true);
                 t.start();
             }
         }
+    }
+
+    private static Thread getReporterThread(List<Thread> threads) {
+        Runnable statusReporter = () -> {
+            try {
+                while (true) {
+                    Thread.sleep(5000);
+                    printThreads(threads);
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted");
+            }
+        };
+
+        Thread reporterThread = new Thread(statusReporter);
+        // The reporter thread should be tied to the lifecycle of java app, hence making it Daemon Thread.
+        reporterThread.setDaemon(true);
+        return reporterThread;
+    }
+
+    private static void printThreads(List<Thread> threads) {
+        System.out.println("\n Thread status: ");
+        threads.forEach((thread) -> {
+            System.out.println(thread.getState() + " ");
+        });
     }
 }
