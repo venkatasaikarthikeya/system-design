@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class PracticalUsage {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
 
         List<Thread> threads = new ArrayList<>();
@@ -19,6 +19,9 @@ public class PracticalUsage {
             int n = sc.nextInt();
             if (n == 0) {
                 System.out.println("Exiting as you entered zero");
+                // Join all the threads before executing the next line
+                joinAllThreads(threads);
+                System.out.println("\n We found the value of "+ threads.size() + " prime numbers");
                 break;
             } else {
                 /*
@@ -81,5 +84,11 @@ public class PracticalUsage {
         threads.forEach((thread) -> {
             System.out.println(thread.getState() + " ");
         });
+    }
+
+    private static void joinAllThreads(List<Thread> threads) throws InterruptedException {
+        for (Thread thread : threads) {
+            thread.join();
+        }
     }
 }
