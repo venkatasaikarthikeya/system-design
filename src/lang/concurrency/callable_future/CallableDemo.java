@@ -88,6 +88,7 @@ public class CallableDemo {
             So, the code below future.get() will not execute until we get the object from the get() method.
         */
         String objectReturnedByCallMethod = future.get();
+        // The code from this line will execute only after future.get() returns an object
         System.out.println(objectReturnedByCallMethod);
 
 
