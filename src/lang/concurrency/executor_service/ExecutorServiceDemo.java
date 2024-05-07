@@ -11,41 +11,21 @@ public class ExecutorServiceDemo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Implement Thread factory as a separate class
-        DaemonThreadFactory daemonThreadFactory = new DaemonThreadFactory();
-        // Pass the number of threads and thread factory instance to newFixedThreadPool()
-        ExecutorService executorService = Executors.newFixedThreadPool(3, daemonThreadFactory);
-
         /*
-            // ThreadFactory is a functional interface. Hence, we can use Anonymous Inner Class
-            ExecutorService executorService1 = Executors.newFixedThreadPool(
-                3,
-                new ThreadFactory() {
-
-                    @Override
-                    public Thread newThread(Runnable r) {
-                        Thread t = new Thread(r);
-                        t.setDaemon(true);
-                        // other thread configurations
-                        return t;
-                    }
-                });
+            Cached Thread Pool Executor Service:
+            Doesn't take arguments because it does not need any number up front like newFixedThreadPool(nThreads)
+            The under lying thread pool grows and shrinks in size as per the requirement
+            When all the threads are currently running, then when a runnable comes, then it created a new thread instance and uses it
+            It does not create thread instances forever
+            When ever a returned thread is not used for 60 seconds, it removes that thread
         */
-
-        /*
-            // ThreadFactory is a functional interface. Hence, we can use Lambdas as well
-            ExecutorService executorService2 = Executors.newFixedThreadPool(3, (r) -> {
-                Thread t = new Thread(r);
-                t.setDaemon(true);
-                // other thread configurations
-                return t;
-            });
-        */
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
         while (true) {
             System.out.println("Enter the value of n to find nth prime number: ");
             int n = sc.nextInt();
             if (n == 0) {
+                executorService.close();
                 break;
             } else {
                 Runnable r = () -> {
@@ -54,16 +34,6 @@ public class ExecutorServiceDemo {
                 };
                 executorService.execute(r);
             }
-        }
-    }
-
-    static class DaemonThreadFactory implements ThreadFactory {
-
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread t = new Thread(r);
-            t.setDaemon(true);
-            return t;
         }
     }
 }
