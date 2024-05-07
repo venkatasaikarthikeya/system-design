@@ -12,14 +12,11 @@ public class ExecutorServiceDemo {
         Scanner sc = new Scanner(System.in);
 
         /*
-            Cached Thread Pool Executor Service:
-            Doesn't take arguments because it does not need any number up front like newFixedThreadPool(nThreads)
-            The under lying thread pool grows and shrinks in size as per the requirement
-            When all the threads are currently running, then when a runnable comes, then it created a new thread instance and uses it
-            It does not create thread instances forever
-            When ever a returned thread is not used for 60 seconds, it removes that thread
+            Single Thread executor:
+            It just creates one thread instance and re-uses it over and again.
+            If a new runnable comes in the meantime, it has to wait until that thread returns after its execution
         */
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         while (true) {
             System.out.println("Enter the value of n to find nth prime number: ");
