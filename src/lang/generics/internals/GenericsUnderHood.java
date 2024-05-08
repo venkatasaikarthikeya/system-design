@@ -67,6 +67,17 @@ public class GenericsUnderHood {
             3. Type Erasure: Once a code is successfully compiled, all the generic types are removed from the code before it is run
         */
 
+        /*
+            Note:
+            We can assign a generic type to a raw type
+            List x = names; // This is not an error
+
+            We can assign a raw type to a generic type
+            List x = new ArrayList();
+            List<String> y = x; // Not an error
+
+            All of this is again because of the backwards compatibility story.
+        */
     }
 
     private static void addToNames(List<String> names, String s) {
