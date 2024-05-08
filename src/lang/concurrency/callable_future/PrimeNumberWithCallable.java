@@ -3,7 +3,7 @@ package lang.concurrency.callable_future;
 import lang.concurrency.basic_thread_runnable.PrimeNumberUtil;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -12,7 +12,7 @@ public class PrimeNumberWithCallable {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         Scanner sc = new Scanner(System.in);
         ExecutorService executorService = Executors.newCachedThreadPool();
-
+        ArrayList<Future<Integer>> futures = new ArrayList<>();
         while (true) {
             System.out.println("Enter the value of n to find nth prime number: ");
             int n = sc.nextInt();
@@ -24,9 +24,16 @@ public class PrimeNumberWithCallable {
                     return PrimeNumberUtil.findNthPrime(n);
                 };
                 Future<Integer> future = executorService.submit(callable);
-                // The below blocks the main thread...
-                System.out.println(n + "th prime number is " + future.get());
-                // The loop will not continue until the future.get() returns and unblocks main thread
+                futures.add(future);
+            }
+        }
+        // To avoid blocking the main thread, we can store future objects and use them later
+        Iterator<Future<Integer>> iterator = futures.iterator();
+        while (iterator.hasNext()) {
+            Future<Integer> future = iterator.next();
+            if (future.isDone()) {
+                System.out.println(future.get());
+                iterator.remove();
             }
         }
     }
