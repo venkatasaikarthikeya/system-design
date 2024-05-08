@@ -91,7 +91,18 @@ public class CallableDemo {
         // The code from this line will execute only after future.get() returns an object
         System.out.println(objectReturnedByCallMethod);
 
+        /*
+            Important methods of ExecutorService class to visit: (Java docs)
+            1. execute()
+            2. submit()
+            3. invokeAll()
+            4. invokeAny()
 
-
+            Important methods of Future class to visit: (Java docs)
+            1. get()
+            2. isDone()
+            3. cancel()
+            4. isCancelled()
+        */
     }
 }
