@@ -43,5 +43,33 @@ public class Zoo {
             This way our animals are safe.
         */
 
+        /*
+            We just added a Constructor to Cage class to simplify the above approach. Instead of setting animal1 and animal2
+            separately, we can pass them in the constructor to make our lives easier.
+
+            We have added the constructor to cage class. Now, let's check if this breaks anything.
+        */
+        Cage<Monkey> incorrectChimpMonkeyCage = new Cage(new Monkey(), new Lion());
+        /*
+            ideally, the compiler should throw an error for the above line, because we are added a Lion in a monkey cage. But,
+            it seems happy with this. Why is this?
+            This is because in the expression Cage<Monkey> chimpMonkeyCage, the compiler associates Cage<Monkey> type
+            check only for the chimpMonkeyCage variable, and it doesn't associate it with the Constructor because we know that
+            a Non-generic type can be assigned to a generic type(backwards compatibility). So, let the compiler check
+            the constructor parameters as well, we might have to explicitly specify the type along with constructor as below:
+        */
+        Cage<Monkey> correctChimpMonkeyCage = new Cage<Monkey>(new Monkey(), new Monkey());
+        /*
+            With new Cage<Monkey>(new Monkey(), new Monkey()), the compiler now associates the Type to the constructor
+            parameters because of which, if we try to add a lion in the above constructor, the compiler will throw an error
+            saying that the required type is Monkey and the actual type is Lion. Hence, our Monkey is safe from Lion.
+
+            Takeaway:
+            Even though it seems redundant to add Type along with Constructor, it seems essential for above cases. So, to
+            save ourselves from such errors let's add Generic type on both sides like below:
+
+            Cage<Monkey> monkeys = new Cage<Monkey>(new Monkey(), new Monkey());
+        */
+
     }
 }
