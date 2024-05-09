@@ -1,23 +1,23 @@
 package lang.generics.internals.zoo;
 
-public class Cage {
+public class Cage<T> {
 
-    private Object animal1;
-    private Object animal2;
+    private T animal1;
+    private T animal2;
 
-    public Object getAnimal1() {
+    public T getAnimal1() {
         return animal1;
     }
 
-    public void setAnimal1(Object animal1) {
+    public void setAnimal1(T animal1) {
         this.animal1 = animal1;
     }
 
-    public Object getAnimal2() {
+    public T getAnimal2() {
         return animal2;
     }
 
-    public void setAnimal2(Object animal2) {
+    public void setAnimal2(T animal2) {
         this.animal2 = animal2;
     }
 }

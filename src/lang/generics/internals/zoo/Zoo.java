@@ -25,7 +25,22 @@ public class Zoo {
         /*
             See, someone mistakenly added a lion to a monkey cage. Now, the monkey was killed and eaten by Lion.
             So, what's the solution?
+                USE GENERICS
+            If we use generics, we can modify the Cage class with a Type Parameter. Now, if you see the updated cage class,
+            we can see that Cage<T> is a parameterized type and with whatever type you create Cage, only that type of animal
+            will be allowed in to the cage by the compiler. Obviously, we know this is a compile time construct.
+        */
+        Cage<Monkey> monkeyCage = new Cage<>();
+        monkeyCage.setAnimal1(new Monkey());
+        monkeyCage.setAnimal2(new Monkey());
 
+        Cage<Lion> lionCage = new Cage<>();
+        lionCage.setAnimal1(new Lion());
+        lionCage.setAnimal2(new Lion());
+        /*
+            monkeyCage.setAnimal1(new Lion()); throws a compile time error saying that the required type is Monkey and the
+            actual type is Lion. It asks us to replace lion with a monkey.
+            This way our animals are safe.
         */
 
     }
