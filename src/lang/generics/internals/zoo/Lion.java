@@ -1,5 +1,5 @@
 package lang.generics.internals.zoo;
 
-public class Lion {
+public class Lion extends Animal {
 
 }
