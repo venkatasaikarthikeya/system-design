@@ -52,7 +52,14 @@ public class B_UpperBoundWildCards {
         printList(doubles);
 
         /*
+            Takeaway:
+            1. <? extends SomeType> - tells compiler to accept anything that extends SomeType
+            2. Only READ is allowed but not WRITE
+            3. When you get an element from it, we get element of type SomeType
 
+            List<? extends Number> x = numbers; // Correct
+            x = doubles; // Correct
+            x = new ArrayList<String>(); // Error - Required type: ? extends Number, Provided type: String
         */
 
     }
