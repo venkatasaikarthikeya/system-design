@@ -1,6 +1,6 @@
 package lang.generics.internals.zoo;
 
-public class Cage<T extends Animal> {
+public class Cage<T extends Animal & Eats & Runs> {
 
     private T animal1;
     private T animal2;
@@ -38,5 +38,43 @@ public class Cage<T extends Animal> {
             compiler will know that the type should be at least an animal.
         */
         return animal1.getType().equals(animal2.getType());
+    }
+
+    public void feedAnimal() {
+        /*
+            Now, you want to enforce one more restriction. You only want to put Animals in the cage which
+            can eat and run. So, we only want animals which implement Eats, and Runs interface, so that
+            we can call eat() and run() methods on animal objects.
+
+            So, if you try to call eat() and run() methods on animal1 and animal2, the methods are not even
+            available to call because at this moment all that the compiler knows is A cage can have anything
+            that is an animal. It doesn't know if that something has the capability to eat and run. To tell
+            the compiler that T can eat and run, you might have to do the below
+
+            Incorrect ways:
+
+            1. class Cage<T extends Animal, Eats, Runs> => Compiler considers Eats, and Runs also as type parameters
+            The above thing is equivalent Generic type with Multiple type parameters like Cage<A, B, C>
+
+            2. class Cage<T extends Animal implements Eats implements Runs> => Incorrect syntax
+            implements is not allowed inside <>
+
+            Correct way:
+
+            class Cage<T extends Animal & Eats & Runs> => Correct syntax
+
+            implications:
+            1. We know a class can extend only 1 class in Java, hence for interfaces we can append interface names
+               separated by '&' symbols.
+            2. <T extends Class & Interface1 & Interface2 & ......>
+               The order should class first and interfaces next
+            3. If T is not extending anything and only implementing interfaces, then interface can be first
+               <T extends Interface1 & Interface2 & .....>
+            However the order of interfaces doesn't matter
+        */
+        animal1.eat();
+        animal2.eat();
+        animal1.run();
+        animal2.run();
     }
 }
