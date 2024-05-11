@@ -77,4 +77,16 @@ public class Cage<T extends Animal & Eats & Runs> {
         animal1.run();
         animal2.run();
     }
+
+    /*
+        The above isCompatible method is actually of no use because we are checking the compatibility after
+        creating the Cage. Instead, we can use the below static method to check the compatibility before
+        instantiating and if the below method returns false, then we need not instantiate the Cage.
+
+        Static Generic Method:
+        Follow the below example for syntax
+    */
+    public static <E extends Animal> boolean isCompatible(E animal1, E animal2) {
+        return animal1.getType().equals(animal2.getType());
+    }
 }
