@@ -1,0 +1,50 @@
+
+Summary of Generics:
+
+    Generics is a Compile time construct used to provide type safety, and it works only with Java types but now with Primitive types.
+For this reason, along with generics wrapper classes are also created in Java 5. Auto boxing and Unboxing works in the background
+and helps generics to work only with Java types even though primitive types are given.
+
+* Drawbacks of not using Generics?
+So, the two drawbacks of not using Generics are:
+1. Explicit type casting everytime when you access an object of a collection
+2. No type safety. You can even add a Cat object to names and no one will stop you doing that which finally gives
+a ClassCastException during run time.
+
+* Why do we need Generics?
+Generic is a Compile time construct. The main purpose of generics is to avoid type casting and to provide type safety.
+
+* What is Autoboxing and Unboxing?
+Autoboxing is a feature introduced in Java 5 that automatically converts primitive types into their corresponding wrapper
+class objects when needed. This conversion is done by the Java compiler rather than explicitly handled by the programmer,
+making code easier to write and read. The reverse process, converting an object of a wrapper class to its corresponding
+primitive type, is called unboxing.
+
+* Primitive Types and Their Corresponding Wrapper Classes
+Each primitive type in Java has a corresponding wrapper class:
+byte → Byte, short → Short, int → Integer, long → Long, float → Float, double → Double, char → Character, boolean → Boolean
+
+* Benefits of Autoboxing and Unboxing?
+- Simplicity: Reduces the complexity of the code by avoiding manual conversion between primitives and wrapper classes.
+- Compatibility: Makes it possible to use primitive types in generic collections and APIs where objects are required.
+
+* Drawbacks of Autoboxing and Unboxing?
+- Performance: Autoboxing and unboxing can lead to performance hits because each conversion involves object creation or
+             dereferencing, which is not as efficient as operating directly with primitive types.
+- Null References: Unboxing can throw a NullPointerException if the wrapper object is null
+Example:
+Integer nullInteger = null;
+// This will throw NullPointerException because you can't unbox a null reference to a primitive
+int willThrowError = nullInteger;
+
+* what is type erasure?
+Type erasure is a concept in Java Generics that refers to the compile-time process by which the Java compiler removes
+generic type information from your code, enforcing type constraints only at compile time and inserting type casts where
+necessary. This process enables Java generics to maintain backward compatibility with older versions of Java that do not
+support generics.
+
+* The compiler associates a Generic type only with the variable name but not with the underlying instance. So, if you
+assign the instance to another non-generic type and add values of another types compiler will not throw an error
+keeping in view of backwards compatibility.
+
+
