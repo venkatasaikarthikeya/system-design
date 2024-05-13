@@ -85,4 +85,12 @@ public class BasicPerson {
         */
         return id == person.id && Objects.equals(name, person.name)  && Objects.equals(age, person.age);
     }
+
+    /*
+        Refer C_Hashcode.java for more information
+    */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age);
+    }
 }
