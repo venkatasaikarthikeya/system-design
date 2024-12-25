@@ -28,48 +28,26 @@ public class TicTacToe {
         } else {
             int moveValue = player == 0 ? -1 : 1;
             board[row][col] = moveValue;
-
-            // ROW CHECK
-            boolean win = true;
+            boolean rowWin = true, colWin = true, diagonalWin = true, reverseDiagonalWin = true;
             for (int i = 0; i < n; i++) {
+                // row check
                 if (board[row][i] != moveValue) {
-                    win = false;
-                    break;
+                    rowWin = false;
                 }
-            }
-
-            // COLUMN CHECK
-            win = true;
-            for (int i = 0; i < n; i++) {
+                // col check
                 if (board[i][col] != moveValue) {
-                    win = false;
-                    break;
+                    colWin = false;
+                }
+                // diagonal check
+                if (board[i][i] != moveValue) {
+                    diagonalWin = false;
+                }
+                // reverse diagonal check
+                if (board[i][n - i - 1] != moveValue) {
+                    reverseDiagonalWin = false;
                 }
             }
-
-            // DIAGONAL CHECK
-            if (row == col) {
-                win = true;
-                for (int i = 0; i < n; i++) {
-                    if (board[i][i] != moveValue) {
-                        win = false;
-                        break;
-                    }
-                }
-            }
-
-            // REVERSE DIAGONAL CHECK
-            if (row == n - col - 1) {
-                win = true;
-                for (int i = 0; i < n; i++) {
-                    if (board[i][n - i - 1] != moveValue) {
-                        win = false;
-                        break;
-                    }
-                }
-            }
-
-            if (win) {
+            if (rowWin || colWin || diagonalWin || reverseDiagonalWin) {
                 return player == 0 ? -1 : 1;
             }
         }
