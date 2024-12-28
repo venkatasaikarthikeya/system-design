@@ -1,0 +1,14 @@
+package LLD.B_design_patterns.structural.decorator.code.usecase2;
+
+public class SlackNotifier extends NotificationDecorator {
+
+    public SlackNotifier(Notifier notifier) {
+        super(notifier);
+    }
+
+    @Override
+    public void notify(String alert) {
+        super.notify(alert);
+        System.out.println("Notifying the user via Slack....MESSAGE: " + alert);
+    }
+}

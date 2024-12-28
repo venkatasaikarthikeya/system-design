@@ -1,0 +1,16 @@
+There are three types of design patterns:
+
+1. Creational - deal with creation of objects
+   (Book: Creational design patterns provide various object creation mechanisms which increase flexibility and
+          reuse of existing code)
+   (Factory Method, Abstract Factory, Builder, Prototype(clone), Singleton)
+
+2. Structural - Once you create objects, you need to relate them. These design patterns deal with
+                creating relationships between objects
+   (Book: Structural patterns explain how to assemble objects and classes into larger structures, while keeping
+          this structures flexible and efficient)
+   (Adapter, Decorator, Proxy)
+
+3. Behavioral - Once the objects are related to each other, they need to communicate with each other. These design
+                patterns deal with creating communication between objects
+   (Observer, Strategy)
